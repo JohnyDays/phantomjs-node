@@ -118,6 +118,7 @@ pageWrap = (page) ->
       cb()
     getContent: (cb=->) -> cb page.content
     getCookies: (cb=->) -> cb page.cookies
+    clearCookies: (cb=->) -> cb page.clearCookies()
     renderBase64: (type, cb=->) -> cb page.renderBase64 type
     setHeaders: (headers, cb=->) ->
       page.customHeaders = headers
