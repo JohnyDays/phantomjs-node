@@ -1,6 +1,7 @@
 # Require gets overwritten by browserify, so we have to reimplement it from
 # scratch - boo :(
 webpage = core_require('webpage')
+cookiejar = core_require('cookiejar');
 
 shoe     = require('shoe')
 dnode    = require('dnode')
@@ -117,6 +118,13 @@ pageWrap = (page) ->
       page.render file, opts
       cb()
     getContent: (cb=->) -> cb page.content
+    newCookieJar: (cb=->) -> 
+      page.cookieJar = cookiejar.create()
+      cb()
+    closeCookieJar: (cb=->) -> 
+      if page.cookieJar
+        page.cookieJar.close()
+      cb()
     getCookies: (cb=->) -> cb page.cookies
     clearCookies: (cb=->) -> cb page.clearCookies()
     renderBase64: (type, cb=->) -> cb page.renderBase64 type
